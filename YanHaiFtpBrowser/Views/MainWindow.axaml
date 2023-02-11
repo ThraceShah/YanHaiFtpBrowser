@@ -1,0 +1,49 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:YanHaiFtpBrowser.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="YanHaiFtpBrowser.Views.MainWindow"
+				WindowStartupLocation="CenterScreen"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="YanHaiFtpBrowser">
+
+    <Design.DataContext>
+        <vm:MainWindowViewModel/>
+    </Design.DataContext>
+	
+	<DockPanel>
+		<StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
+			<TextBlock Text="hostname:" Margin="5,2" HorizontalAlignment="Center"
+					   VerticalAlignment="Center"/>
+			<TextBox Text="{Binding HostName,Mode=TwoWay}" Width="100" Margin="0,2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+			<TextBlock Text="username:" Margin="20,2,5,2" HorizontalAlignment="Center"
+					   VerticalAlignment="Center"/>
+			<TextBox Text="{Binding UserName,Mode=TwoWay}" Width="100" Margin="0,2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+			<TextBlock Text="password:" Margin="20,2,5,2" HorizontalAlignment="Center"
+					   VerticalAlignment="Center"/>
+			<TextBox Text="{Binding Password,Mode=TwoWay}" Width="100" Margin="0,2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+			<TextBlock Text="encoding" Margin="20,2,5,2" HorizontalAlignment="Center"
+					   VerticalAlignment="Center"/>
+			<ComboBox Items="{Binding Encoding,Mode=TwoWay}" Width="100" Margin="0,2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+			<Button Content="Connect" Command="{Binding ConnectCMD}" Margin="20,2,5,2"/>
+		</StackPanel>
+		<DockPanel>
+			<TreeView DockPanel.Dock="Left" Items="{Binding TreeContent}" MinWidth="300">
+				<TreeView.ItemTemplate>
+					<TreeDataTemplate ItemsSource="{Binding Children}">
+						<TextBlock Text="{Binding Name,Mode=TwoWay}"/>
+					</TreeDataTemplate>
+				</TreeView.ItemTemplate>
+			</TreeView>
+			<ListBox Items="{Binding ListContent}">
+				<ListBox.ItemTemplate>
+					<DataTemplate>
+						<TextBlock Text="{Binding Name,Mode=TwoWay}"/>
+					</DataTemplate>
+				</ListBox.ItemTemplate>
+			</ListBox>
+		</DockPanel>
+	</DockPanel>
+</Window>
